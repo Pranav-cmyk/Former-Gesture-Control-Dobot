@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Aoede",
+        "artifical",
         "atask",
         "baudrate",
         "bytesize",
@@ -34,6 +35,7 @@
         "pcoords",
         "Phry",
         "playout",
+        "ppcords",
         "ppoints",
         "pydobot",
         "pyfirmata",
@@ -44,5 +46,6 @@
         "vertexai",
         "Videoloop",
         "Xrqeu"
-    ]
+    ],
+    "a-file-icon-vscode.folderColor": "#676e95"
 }
