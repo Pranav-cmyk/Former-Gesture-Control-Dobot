@@ -32,7 +32,7 @@ class DobotVision:
     
     def __init__(
         self,
-        camera_index=1, 
+        camera_index=0, 
         api_key=os.getenv('GOOGLE_API_KEY'),
         model='gemini-2.0-flash-exp',
         COM_PORT=None,
