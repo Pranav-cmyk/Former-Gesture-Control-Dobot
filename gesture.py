@@ -10,6 +10,11 @@ while True:
         _, frame = cap.read()
         RGBFrame = cv.cvtColor(frame, cv.COLOR_BGR2RGB) 
         BGRFrame, handlms = tracker.detecthands(RGBFrame)
+        if len(handlms) > 0:
+            BGRFrame, angles = tracker.get_angles_from_lndmks(BGRFrame, handlms, 8, 5, 0)
+            print(angles)
+            
+
         BGRFrame = cv.flip(BGRFrame, 1)
         cv.imshow("Frame", BGRFrame)
         

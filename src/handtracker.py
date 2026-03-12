@@ -9,7 +9,7 @@ class HandTracking:
         self.mp_drawing = mp.solutions.drawing_utils
         self.hands_instance = self.mp_hands.Hands(min_detection_confidence = min_detection_confidence, min_tracking_confidence = min_tracking_confidence, max_num_hands = max_num_hands)
         
-    def detecthands(self, RGBframe):
+    def detectHands(self, RGBframe):
         result = self.hands_instance.process(RGBframe)
         handslms = []
         if result.multi_hand_landmarks:
@@ -18,7 +18,7 @@ class HandTracking:
                 handslms.append(handlmk)
         return cv.cvtColor(RGBframe, cv.COLOR_RGB2BGR), handslms
     
-    def get_coordinates(self, hand, *marks, frame):
+    def getCoordinates(self, hand, *marks, frame):
         height, width = frame.shape[:2]
         ncoords = {}
         pcoords = {}
@@ -28,7 +28,7 @@ class HandTracking:
             pcoords[mark] = (int(point.x * width), int(point.y * height))
         return ncoords, pcoords
         
-    def Drawconnections(self, frame, hand, mark1, mark2, use_normalised_distance = False):
+    def drawConnections(self, frame, hand, mark1, mark2, use_normalised_distance = False):
         h, w = frame.shape[:2]
         distance = None
         
@@ -41,11 +41,9 @@ class HandTracking:
 
         return frame, distance
     
-    def get_angles_from_lndmks(self, frame, hands, mark1, mark2, mark3):
-        if len(hands) == 0:
-            return frame, []
-        angles = []
+    def getAnglesFromLandmarks(self, frame, hands, mark1=8, mark2=5, mark3=0):
         
+        angles = []
         for hand in hands:
             try:
                 _, ppoints = self.get_coordinates(hand, mark1, mark2, mark3, frame = frame)
@@ -72,7 +70,6 @@ class HandTracking:
 
         for hand in hands:
             _, pcoords = self.get_coordinates(hand, *finger_tips, *finger_bases, frame=frame)
-            
             for tip, base in zip(finger_tips, finger_bases):
                 if pcoords[tip][1] < pcoords[base][1]:
                     finger_count += 1
